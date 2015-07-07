@@ -147,8 +147,6 @@ comment as a filename."
     '(when (executable-find ispell-program-name)
        (add-hook 'text-mode-hook 'turn-on-flyspell)))
 
-
-
   (defalias 'yes-or-no-p 'y-or-n-p)
   (defalias 'auto-tail-revert-mode 'tail-mode)
 
@@ -292,7 +290,6 @@ comment as a filename."
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'msk-remove-elc-on-save)
   (add-hook 'emacs-lisp-mode-hook 'msk-prog-mode-hook)
-  (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
   (defun msk-remove-elc-on-save ()
     "If you're saving an elisp file, likely the .elc is no longer valid."
@@ -303,9 +300,6 @@ comment as a filename."
                     (delete-file (concat buffer-file-name "c"))))))
 
   (define-key emacs-lisp-mode-map (kbd "C-c v") 'eval-buffer)
-
-;;; Enhance Lisp Modes
-
   (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
   (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
@@ -317,12 +311,6 @@ comment as a filename."
        (:foreground "grey55")))
     "Face used to dim parentheses."
     :group 'starter-kit-faces)
-
-  (eval-after-load 'paredit
-    ;; need a binding that works in the terminal
-    '(progn
-       (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
-       (define-key paredit-mode-map (kbd "M-(") 'paredit-backward-slurp-sexp)))
 
   (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
     (when (> (display-color-cells) 8)
