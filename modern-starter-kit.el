@@ -287,7 +287,7 @@ comment as a filename."
       (let ((case-fold-search isearch-case-fold-search))
         (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'msk-remove-elc-on-save)
   (add-hook 'emacs-lisp-mode-hook 'msk-prog-mode-hook)
 
@@ -312,7 +312,7 @@ comment as a filename."
     "Face used to dim parentheses."
     :group 'starter-kit-faces)
 
-  (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+  (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript racket))
     (when (> (display-color-cells) 8)
       (font-lock-add-keywords (intern (concat (symbol-name mode) "-mode"))
                               '(("(\\|)" . 'msk-paren-face))))
